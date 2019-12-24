@@ -1,10 +1,10 @@
-import React from "react";
-import DrinkItem from "./DrinkItem";
-import Spinner from "../layout/Spinner";
-import PropTypes from "prop-types";
+import React from 'react';
+import DrinkItem from './DrinkItem';
+import Spinner from '../layout/Spinner';
+import PropTypes from 'prop-types';
 
-const Drinks = ({ drinks }) => {
-  if (typeof drinks === "undefined") {
+const Drinks = ({ drinks, loading }) => {
+  if (loading) {
     return <Spinner />;
   } else {
     return (
