@@ -2,6 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const DrinkItem = ({ drink }) => {
+  const ingredients = Object.values(drink)
+    .slice(21, 35)
+    .filter(n => n);
+  const measurements = Object.values(drink)
+    .slice(36, 50)
+    .filter(n => n);
+  const listIngred = {};
+  ingredients.forEach((key, i) => (listIngred[key] = measurements[i]));
+
   const {
     strDrink,
     strCategory,
@@ -34,10 +43,11 @@ const DrinkItem = ({ drink }) => {
           </span>
           <h5>Ingredients</h5>
           <ul className="collection">
-            <li className="collection-item">Alvin</li>
-            <li className="collection-item">Alvin</li>
-            <li className="collection-item">Alvin</li>
-            <li className="collection-item">Alvin</li>
+            {Object.keys(listIngred).map(key => (
+              <li key={key} className="collection-item">
+                {key} <div className="secondary-content">{listIngred[key]}</div>
+              </li>
+            ))}
           </ul>
           <h5>Instructions</h5>
           <p>{strInstructions}</p>

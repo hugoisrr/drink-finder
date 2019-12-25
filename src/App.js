@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Navbar from './component/layout/Navbar';
-import Drinks from './component/drinks/Drinks';
-import Search from './component/drinks/Search';
+import Navbar from './components/layout/Navbar';
+import Drinks from './components/drinks/Drinks';
+import Search from './components/drinks/Search';
+import About from './components/pages/About';
 import axios from 'axios';
 import M from 'materialize-css';
 
@@ -64,6 +65,7 @@ class App extends Component {
                   </Fragment>
                 )}
               />
+              <Route exact path="/about" component={About} />
             </Switch>
           </div>
         </div>
