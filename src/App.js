@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Drinks from './components/drinks/Drinks';
@@ -9,76 +9,74 @@ import M from 'materialize-css';
 
 import './App.css';
 
-class App extends Component {
-  state = {
-    drinks: [],
-    loading: false
-  };
+const App = () => {
+  const [drinks, setDrinks] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  async componentDidMount() {
-    // Get random drink
-    this.setState({ loading: true });
-
-    const res = await axios.get(
-      'https://www.thecocktaildb.com/api/json/v1/1/random.php'
-    );
-
-    // console.log(res.data.drinks);
-
-    this.setState({ drinks: res.data.drinks, loading: false });
-
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(
+        'https://www.thecocktaildb.com/api/json/v1/1/random.php'
+      );
+      setDrinks(res.data.drinks);
+    };
+    setLoading(true);
+    fetchData();
+    setLoading(false);
     M.AutoInit();
-  }
+  }, []);
 
-  searchDrinks = async drink => {
-    this.setState({ loading: true });
+  const searchDrinks = async drink => {
+    setLoading(true);
     const res = await axios.get(
       `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`
     );
     if (res.data.drinks === null) {
-      this.setAlert(`Sorry, your drink ${drink} is not found!`, 'brown');
-      this.setState({ loading: false });
+      setAlert(`Sorry, your drink ${drink} is not found!`, 'brown');
+
+      setLoading(false);
     } else {
-      this.setState({ drinks: res.data.drinks, loading: false });
+      setDrinks(res.data.drinks);
+      setLoading(false);
     }
   };
 
-  clearDrinks = () => this.setState({ drinks: [], loading: false });
+  const clearDrinks = () => {
+    setDrinks([]);
+    setLoading(false);
+  };
 
-  setAlert = (msg, color) => {
+  const setAlert = (msg, color) => {
     M.toast({ html: `${msg}`, classes: `${color}` });
   };
 
-  render() {
-    const { drinks, loading } = this.state;
-    return (
-      <Router>
-        <div className="App">
-          <Navbar />
-          <div className="container">
-            <Switch>
-              <Route
-                exact
-                path="/"
-                render={props => (
-                  <Fragment>
-                    <Search
-                      searchDrinks={this.searchDrinks}
-                      clearDrinks={this.clearDrinks}
-                      showClear={drinks.length > 0 ? true : false}
-                      setAlert={this.setAlert}
-                    />
-                    <Drinks drinks={drinks} loading={loading} />
-                  </Fragment>
-                )}
-              />
-              <Route exact path="/about" component={About} />
-            </Switch>
-          </div>
+  return (
+    <Router>
+      <div className="App">
+        <Navbar />
+        <div className="container">
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <Fragment>
+                  <Search
+                    searchDrinks={searchDrinks}
+                    clearDrinks={clearDrinks}
+                    showClear={drinks.length > 0 ? true : false}
+                    setAlert={setAlert}
+                  />
+                  <Drinks drinks={drinks} loading={loading} />
+                </Fragment>
+              )}
+            />
+            <Route exact path="/about" component={About} />
+          </Switch>
         </div>
-      </Router>
-    );
-  }
-}
+      </div>
+    </Router>
+  );
+};
 
 export default App;
