@@ -15,15 +15,17 @@ class App extends Component {
     loading: false
   };
 
-  componentDidMount() {
-    // Get first list of drinks
-    // this.setState({ loading: true });
+  async componentDidMount() {
+    // Get random drink
+    this.setState({ loading: true });
 
-    // const res = await axios.get(
-    //   'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a'
-    // );
+    const res = await axios.get(
+      'https://www.thecocktaildb.com/api/json/v1/1/random.php'
+    );
 
-    // this.setState({ drinks: res.data, loading: false });
+    // console.log(res.data.drinks);
+
+    this.setState({ drinks: res.data.drinks, loading: false });
 
     M.AutoInit();
   }
@@ -33,7 +35,12 @@ class App extends Component {
     const res = await axios.get(
       `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`
     );
-    this.setState({ drinks: res.data.drinks, loading: false });
+    if (res.data.drinks === null) {
+      this.setAlert(`Sorry, your drink ${drink} is not found!`, 'brown');
+      this.setState({ loading: false });
+    } else {
+      this.setState({ drinks: res.data.drinks, loading: false });
+    }
   };
 
   clearDrinks = () => this.setState({ drinks: [], loading: false });
