@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/drink-finder/static/css/main.797ba88f.chunk.css",
-    "main.js": "/drink-finder/static/js/main.32d29f14.chunk.js",
-    "main.js.map": "/drink-finder/static/js/main.32d29f14.chunk.js.map",
+    "main.js": "/drink-finder/static/js/main.dcc2ce85.chunk.js",
+    "main.js.map": "/drink-finder/static/js/main.dcc2ce85.chunk.js.map",
     "runtime-main.js": "/drink-finder/static/js/runtime-main.37f00eab.js",
     "runtime-main.js.map": "/drink-finder/static/js/runtime-main.37f00eab.js.map",
     "static/js/2.73b2660d.chunk.js": "/drink-finder/static/js/2.73b2660d.chunk.js",
     "static/js/2.73b2660d.chunk.js.map": "/drink-finder/static/js/2.73b2660d.chunk.js.map",
     "index.html": "/drink-finder/index.html",
-    "precache-manifest.0fe0c6d4aa6f6d9bf7d3dea41702c78b.js": "/drink-finder/precache-manifest.0fe0c6d4aa6f6d9bf7d3dea41702c78b.js",
+    "precache-manifest.859df282709fe7065ca582350f5d0b84.js": "/drink-finder/precache-manifest.859df282709fe7065ca582350f5d0b84.js",
     "service-worker.js": "/drink-finder/service-worker.js",
     "static/css/main.797ba88f.chunk.css.map": "/drink-finder/static/css/main.797ba88f.chunk.css.map",
     "static/js/2.73b2660d.chunk.js.LICENSE": "/drink-finder/static/js/2.73b2660d.chunk.js.LICENSE"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.37f00eab.js",
     "static/js/2.73b2660d.chunk.js",
     "static/css/main.797ba88f.chunk.css",
-    "static/js/main.32d29f14.chunk.js"
+    "static/js/main.dcc2ce85.chunk.js"
   ]
 }
